@@ -1,0 +1,19 @@
+---
+- hosts: all
+  connection: local
+  gather_facts: False
+
+  roles:
+    - role: roles/operational_faults
+      tags: operational_faults
+
+    - role: roles/config_faults
+      tags: config_faults
+
+    - role: roles/communications_faults
+      tags: communications_faults
+
+    - role: roles/environmental_faults
+      tags: environmental_faults
+
+

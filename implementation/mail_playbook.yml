@@ -1,0 +1,29 @@
+---
+- name: APIC - SEND EMAIL
+  hosts: localhost
+  gather_facts: no
+  
+  vars: 
+     items: []
+
+  tasks:
+
+     - name: Create list of HTML files
+       set_fact: items="{{ items + [ item ] }}"
+       with_fileglob:
+       - "*.html"
+
+
+     - name: Send email notification with HTML files
+       mail:
+         host: smtp.gmail.com
+         port: 587
+         username: {{ replace_with_your_username }}
+         password: {{ replace with your password }}
+         to: {{ replace_with_your_destination_email }}
+         subject: "#APIC fault extract - 24 hours"
+         body: |
+               Attached extracts consist of faults (x4 domains) for the last 24 hours.
+               This is a multiline example
+         attach: "{{ items }}"
+ 

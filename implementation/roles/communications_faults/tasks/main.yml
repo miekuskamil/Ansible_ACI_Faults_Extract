@@ -1,0 +1,16 @@
+---
+- name: GET COMMUNICATIONS FAULTS FROM "{{ inventory_hostname }}"
+  aci_rest:
+    host: "{{ inventory_hostname }}"
+    username: "{{ username }}"
+    password: "{{ password }}"
+    method: get
+    path: /api/node/class/faultInfo.json?query-target-filter=and(and(lt(faultInst.created,"{{today}}"),gt(faultInst.created,"{{yesterday}}")),eq(faultInst.type,"communications"))
+    validate_certs: False
+  register: communications
+
+- debug: 
+    var: communications
+
+
+

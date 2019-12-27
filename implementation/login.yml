@@ -1,0 +1,12 @@
+---
+- name: Login
+  uri:
+    url: https://{{ inventory_hostname }}/api/aaaLogin.json
+    method: POST
+    body: '"{ "aaaUser" : { "attributes" : { "name" : "{{ username }}" , "pwd" : "{{ password }}" } } }"'
+    status_code: 200
+    validate_certs: False
+    headers:
+      Content-Type: "application/json"
+  no_log: True
+  register: login
