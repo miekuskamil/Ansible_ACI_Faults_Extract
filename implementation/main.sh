@@ -19,8 +19,10 @@ yesterday_line=$(date +%Y-%m-%d-%H:%M --date="1 day ago")
 
 ###REACHIBILITY CHECK
 declare -a arr
-arr+=($(python nested_list_iteration.py | tail -n1 ))
-#echo "${arr[@]}"
+ansible-playbook nested_list_iteration.yml
+ansible-playbook nested_list_iteration.yml
+arr+=($(cat 'apics.txt'))
+echo "${arr[@]}"
 
 
 

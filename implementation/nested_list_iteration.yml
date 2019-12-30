@@ -1,0 +1,13 @@
+---
+- name: APIC reachibility play with custom module
+  hosts: localhost
+  gather_facts: False
+  connection: local
+  tasks:
+    - name: Run APIC reachibility test module
+      nested_list_iteration:
+      register: apics
+
+    - name: Run debug APIC reachibility test module
+      debug:
+        msg: '{{ apics }}'
