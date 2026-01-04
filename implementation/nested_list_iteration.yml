@@ -1,13 +1,10 @@
----
-- name: APIC reachibility play with custom module
-  hosts: localhost
-  gather_facts: False
-  connection: local
-  tasks:
-    - name: Run APIC reachibility test module
-      nested_list_iteration:
-      register: apics
+- name: Select reachable APICs
+  apic_selector:
+    source_file: list_of_lists.yml
+    ping_count: 3
+    ping_timeout: 2
+    persist_files: false
+  register: apics
 
-    - name: Run debug APIC reachibility test module
-      debug:
-        msg: '{{ apics }}'
+- debug:
+    var: apics.apics
